@@ -2,19 +2,18 @@
 
 class allum1
 {
-    public $player = "Joueur 1";
+    public $player = "Player 1";
     public $allumettes;
 
     public function __construct()
     {
-        // $this->allumettes = readline("Combien voulez-vous d'allumetes ? ");
         echo "\033[1;91m" . "Le jeu commence avec 11 allumettes !" . "\033[0m" . PHP_EOL;
         $this->allumettes = 11;
     }
 
     public function question()
     {
-        $n = readline( "Au tour de " . $this->player ." Retirez 1, 2 ou 3 allumettes ? ");
+        $n = readline( $this->player ." Retirez 1, 2 ou 3 allumettes ? ");
         if($n <= 3 && $n > 0)
         {
             return $n;
@@ -60,13 +59,13 @@ class allum1
 
     public function turn()
     {
-        if($this->player == "Joueur 1")
+        if($this->player == "Player 1")
         {
             $this->player = "ia";
         }
         else
         {
-            $this->player = "Joueur 1";
+            $this->player = "Player 1";
         }
     }
 
