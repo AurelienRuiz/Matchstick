@@ -62,8 +62,16 @@ class allum1
 
             if($this->allumettes <= 1)
             {
-                echo  $this->player . " à gagné !!!" . PHP_EOL;
-                return 0;
+                if($this->player == "AI")
+                {
+                    echo "You lost to bad..." . PHP_EOL;
+                    return 0;
+                }
+                else
+                {
+                    echo "You win !" . PHP_EOL;
+                    return 0;
+                }
             }
             $this->turn();
             $this->play(); 
