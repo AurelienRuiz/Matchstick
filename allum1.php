@@ -7,15 +7,28 @@ class allum1
 
     public function __construct()
     {
-        echo "\033[1;91m" . "Le jeu commence avec 11 allumettes !" . "\033[0m" . PHP_EOL;
         $this->allumettes = 11;
     }
 
     public function question()
     {
-        $n = readline( $this->player ." Retirez 1, 2 ou 3 allumettes ? ");
-        if($n <= 3 && $n > 0)
+        echo "Your turn : " . PHP_EOL;
+        $n = readline("Matches : ");
+        if(!ctype_digit($n))
         {
+            echo "Error: invalid input (positive number expected)" . PHP_EOL;
+        }
+        elseif($n == 0)
+        {
+            echo "Error : you have to remove at least one match" . PHP_EOL;
+        }
+        elseif ($n > 3)
+        {
+            echo "Error : not enough matches" . PHP_EOL;
+        }
+        elseif($n <= 3 && $n > 0)
+        {
+            echo "Player removed " . $n . " match(es)" . PHP_EOL;
             return $n;
         }
         return $this->question();
@@ -25,18 +38,19 @@ class allum1
     {
         for($i = 0; $i < $this->allumettes; $i++)
         {
-            echo "\033[1;93m" . "|" . "\033[0m";
+            echo "|";
         }
         echo PHP_EOL;
 
-        if($this->player == "ia")
+        if($this->player == "AI")
         {
             $n = $this->ia();
             if($n > 3 || $n <= 0)
             {
                 $n = 1;
             }
-            echo "\033[1;34m" . "L'ia à enlevé " . $n . " allumettes" . "\033[0m";
+            echo "AI's turn ..." . PHP_EOL;
+            echo "AI removed " . $n . " match(es)";
             echo PHP_EOL;
         }
         else
@@ -48,11 +62,9 @@ class allum1
 
             if($this->allumettes <= 1)
             {
-                echo  "\033[1;32m" . $this->player . " à gagné !!!" . "\033[0m";
-                echo PHP_EOL;
+                echo  $this->player . " à gagné !!!" . PHP_EOL;
                 return 0;
             }
-
             $this->turn();
             $this->play(); 
     }
@@ -61,7 +73,7 @@ class allum1
     {
         if($this->player == "Player 1")
         {
-            $this->player = "ia";
+            $this->player = "AI";
         }
         else
         {

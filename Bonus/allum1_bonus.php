@@ -33,9 +33,22 @@ class allum1
 
     public function question()
     {
-        $n = readline( $this->player ." retirez 1, 2 ou 3 allumettes ? ");
-        if($n <= 3 && $n > 0)
+        $n = readline( $this->player ." retirez 1, 2 ou 3 allumettes : ");
+        if(!ctype_digit($n))
         {
+            echo "\033[1;91m" . "Erreur : Entrez un nombre valide". "\033[0m" . PHP_EOL;        
+        }
+        elseif($n == 0)
+        {
+            echo "\033[1;91m" . "Erreur : Entrez un nombre valide". "\033[0m" . PHP_EOL;
+        }
+        elseif ($n > 3)
+        {
+            echo "\033[1;91m" . "Erreur : Entrez un nombre valide". "\033[0m" . PHP_EOL;        
+        }
+        elseif($n <= 3 && $n > 0)
+        {
+            echo $this->player . " à enlevé " . $n . " allumettes". "\033[0m" . PHP_EOL;
             return $n;
         }
         return $this->question();
